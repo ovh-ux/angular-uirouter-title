@@ -1,28 +1,48 @@
-# angular-uirouter-title
+# ng-uirouter-title
 
-AngularJS module for updating browser title based on the current ui-router state.
+> AngularJS module for updating browser title based on the current ui-router state.
 
-## Getting Started
+[![Downloads](https://badgen.net/npm/dt/ng-uirouter-title)](https://npmjs.com/package/@ovh-ux/ng-uirouter-title) [![Dependencies](https://badgen.net/david/dep/ovh-ux/ng-uirouter-title)](https://npmjs.com/package/@ovh-ux/ng-uirouter-title?activeTab=dependencies) [![Dev Dependencies](https://badgen.net/david/dev/ovh-ux/ng-uirouter-title)](https://npmjs.com/package/@ovh-ux/ng-uirouter-title?activeTab=dependencies) [![Gitter](https://badgen.net/badge/gitter/ovh-ux/blue?icon=gitter)](https://gitter.im/ovh/ux)
 
-When declaring your ui-router state, you can add a custom $title :
+## Install
 
-```javascript
-$stateProvider.state("app.item", {
-    url: "/app/item",
-    resolve: {
-        $title: function ($stateParams, $translate) {
-            return $translate.instant("item_description_", { name: $stateParams.id });
-        }
-    }
-});
+```sh
+yarn add @ovh-ux/ng-uirouter-title
 ```
 
-## Documentation
+## Usage
 
-You can use:
-------------
+```js
+import angular from 'angular';
+import '@ovh-ux/ng-uirouter-title';
 
-  - `grunt` : to build.
-  - `grunt watch` : will rebuild your project when a file change. Also re-launch Karma when a spec file change.
-  - `grunt test` : to test specs files with Karma/Jasmine.
-  - `grunt release --type=major|minor|patch` : to release your module.
+angular
+  .module('myApp', [
+    'ngUirouterTitle',
+  ])
+  .config(/* @ngInject */ ($stateProvider) => {
+    // When declaring your ui-router state, you can add a custom $title:
+    $stateProvider.state('app.item', {
+      url: '/app/item',
+      resolve: {
+        $title($stateParams, $translate) {
+          return $translate.instant('item_description_', { name: $stateParams.id });
+        },
+      },
+    });
+  });
+```
+
+## Test
+
+```sh
+yarn test
+```
+
+## Contributing
+
+Always feel free to help out! Whether it's [filing bugs and feature requests](https://github.com/ovh-ux/ng-uirouter-title/issues/new) or working on some of the [open issues](https://github.com/ovh-ux/ng-uirouter-title/issues), our [contributing guide](CONTRIBUTING.md) will help get you started.
+
+## License
+
+[BSD-3-Clause](LICENSE) © OVH SAS
